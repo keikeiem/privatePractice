@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript">
+            window.onload = function() {
+                let paletteMaker = new PaletteMaker();
+                paletteMaker.MakePalette('mypalette');
+                paletteMaker.MakePalette('mypalette2', {click: clickColor, borderColor: '#0000FF'});
+            };
+            
+            function clickColor(color, ev) {
+                if (this.selected)
+                    removeClassName(this.selected, 'selected');
+                this.selected = event.target;
+                addClassName(this.selected, ' selected');
+
+                let result = document.getElementById('result');
+                result.querySelector('.colorContainer').style.backgroundColor = color;
+                result.querySelector('span').innerHTML = color;                
+            }
+
+            function addClassName(domObj, name) {
+                if (domObj.className.indexOf(name) === -1) {
+                    domObj.className += name;
+                }
+            }
+            function removeClassName(domObj, name) {
+                if (domObj.className.indexOf(name) !== -1) {
+                    domObj.className = domObj.className.replace(name, '');
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div style="width:150px; display:inline-block;">
+            <div id="mypalette" style="width:120px;"></div>
+            <div id="result">
+                <div class="colorContainer"></div>
+                <span></span>
+            </div>
+        </div>
+        <div style="width:150px; display:inline-block;">
+            <div id="mypalette2" style="width:120px;"></div>
+        </div>
+    </body>
+</html>
